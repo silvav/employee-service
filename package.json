@@ -1,0 +1,22 @@
+{
+  "name": "employee-service",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/create_employee.js",
+  "scripts": {
+    "test": "echo \\\"Error: no build specified\\\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/silvav/employee-service.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/silvav/employee-service/issues"
+  },
+  "homepage": "https://github.com/silvav/employee-service#readme",
+  "dependencies": {
+    "uuid": "^3.3.3"
+  }
+}
