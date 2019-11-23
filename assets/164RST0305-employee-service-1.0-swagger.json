@@ -1,0 +1,136 @@
+{
+  "openapi" : "3.0.0",
+  "info" : {
+    "version" : "1.0",
+    "title" : "164RST030 Employee service",
+    "description" : ""
+  },
+  "tags" : [ {
+    "name" : "Employee"
+  } ],
+  "paths" : {
+    "/employees/{id}" : {
+      "get" : {
+        "tags" : [ "Employee" ],
+        "summary" : "Gets an employee by ID.",
+        "description" : "Retrieves an employee by the associated ID",
+        "operationId" : "getEmployeeById",
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "description" : "Employee ID",
+          "required" : true,
+          "schema" : {
+            "type" : "string",
+            "format" : "uuid"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Successful operation",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Employee"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "Not found"
+          }
+        }
+      }
+    },
+    "/employees" : {
+      "post" : {
+        "tags" : [ "Employee" ],
+        "summary" : "adds an employee",
+        "operationId" : "addEmployee",
+        "description" : "Adds an employee to the system",
+        "responses" : {
+          "201" : {
+            "description" : "employee created"
+          },
+          "400" : {
+            "description" : "invalid input, object invalid"
+          },
+          "409" : {
+            "description" : "The employee already exists"
+          }
+        },
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/Employee"
+              }
+            }
+          },
+          "required" : true,
+          "description" : "Employee to add"
+        }
+      },
+      "get" : {
+        "tags" : [ "Employee" ],
+        "summary" : "Searches employees.",
+        "description" : "By passing in the appropriate options you can apply filters to your search",
+        "operationId" : "getEmployees",
+        "parameters" : [ {
+          "in" : "query",
+          "name" : "searchString",
+          "description" : "Pass an optional search string for the look up",
+          "required" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Search results matching the filter criteria",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/components/schemas/Employee"
+                  }
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "Bad input"
+          }
+        }
+      }
+    }
+  },
+  "components" : {
+    "schemas" : {
+      "Employee" : {
+        "type" : "object",
+        "required" : [ "jobTitle", "name", "email" ],
+        "properties" : {
+          "id" : {
+            "type" : "string",
+            "format" : "uuid",
+            "example" : "d290f1ee-6c54-4b01-90e6-d701748f0851"
+          },
+          "jobTitle" : {
+            "type" : "string",
+            "example" : "Mathematician"
+          },
+          "name" : {
+            "type" : "string",
+            "example" : "Alan Turing"
+          },
+          "email" : {
+            "type" : "string",
+            "example" : "alan.turin@turing-machine.com"
+          }
+        }
+      }
+    }
+  }
+}
